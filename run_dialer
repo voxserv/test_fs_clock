@@ -1,0 +1,33 @@
+#!/bin/bash
+# this script uses Bash extenstions to Bourne shell
+
+
+if test x${MYURL} = x; then
+    MYURL=`fs_cli -x 'sofia status profile external' | egrep '^URL' | sed -e 's,.*\@,,'`
+fi
+
+if test x${TESTAUDIO} = x; then
+    TESTAUDIO=/opt/test_fs_clock/ITU-T_P_50_BRITISH_ENGLISH.wav
+fi
+
+BATCH=/tmp/test_fs_clock_$$
+
+rm -f /var/tmp/test_fs_clock_*.wav
+
+
+for y in {1..10}; do
+    echo 'bgapi originate sofia/external/test_fs_clock@'${MYURL}' &playback('${TESTAUDIO}')' >>${BATCH}
+done
+
+echo '/exit' >>${BATCH}
+
+for x in {1..10}; do
+    cat ${BATCH} | fs_cli -b -q >/dev/null
+    echo \[`date`\] Batch $x
+    sleep 2
+done
+
+rm -f ${BATCH}
+echo \[`date`\] Sleeping and letting the calls finish
+sleep 130
+echo \[`date`\] Finished

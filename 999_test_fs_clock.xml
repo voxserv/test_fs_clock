@@ -1,0 +1,18 @@
+<include>
+
+  <extension name="test_fs_clock">
+    <condition field="destination_number" expression="^test_fs_clock$">
+      <action application="set" data="jitterbuffer_msec=50:50"/>
+      <action application="set" data="RECORD_READ_ONLY=true"/>
+      <action application="set" data="record_waste_resources=true"/>
+      <action application="set" data="send_silence_when_idle=400"/>
+      <action application="set" data="rec_fname=test_fs_clock_${strepoch()}_${uuid}.wav"/>
+      <action application="set" data="rec_full=/var/tmp/${rec_fname}"/>
+      <action application="record_session" data="${rec_full}"/>
+      <action application="answer"/>
+      <action application="playback" data="silence_stream://-1"/>
+    </condition>
+  </extension>
+  
+  
+</include>

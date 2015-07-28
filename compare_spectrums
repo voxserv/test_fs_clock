@@ -1,0 +1,74 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Math::BigFloat;
+use Getopt::Long;
+use Math::Vector::Real;
+use IO::File;
+
+my $help_needed;
+
+$| = 1;
+
+my $ok = GetOptions
+    (
+     'help'          => \$help_needed,
+    );
+
+
+if( not $ok or $help_needed or scalar(@ARGV) < 2 )
+{
+    print STDERR "Usage: $0 X.wav Y1.wav ...\n",
+    "Options:\n",
+    "  --help            this help message\n";
+    exit 1;
+}
+
+my @data;
+foreach my $fname (@ARGV)
+{
+    if( not -r $fname)
+    {
+        die("$fname is not readable");
+    }
+
+    push(@data, {'fname' => $fname});
+}
+
+my $basev;
+
+foreach my $r (@data)
+{
+    my $fname = $r->{'fname'};
+    my $in = IO::File->new
+        ('sox ' . $fname . ' -n silence 1 0.1 1% reverse silence 1 0.1 1% ' .
+         'reverse stat -freq 2>&1 |');
+    die($!) unless $in;
+
+    my $values = V();
+    while( my $line = $in->getline() )
+    {
+        if( $line =~ /^[0-9.]+\s+([0-9.]+)/o )
+        {
+            push(@{$values}, 0 + $1);
+        }
+    }
+
+    if( defined($basev) )
+    {
+        printf("%s - Distance: %f\n",
+               $fname,
+               $basev->dist($values));
+    }
+    else
+    {
+        $basev = $values;
+    }
+}
+
+
+
+           
+            
+    
