@@ -63,9 +63,9 @@ Running the test
 /opt/test_fs_clock/compare_spectrums /var/tmp/test_fs_clock_*.wav
 ```
 
-The compare_spectrums script takes the frequency histogram of the first
-WAV file and compares it as a vector against histograms of all other WAV
-files.
+The `compare_spectrums` script takes the frequency histogram of the
+first WAV file and compares it as a vector against histograms of all
+other WAV files.
 
 If you see all zeros in Distance output, your clock is perfectly
 fine. If you see varying values above zero, it means that FreeSWITCH
