@@ -88,7 +88,7 @@ digitalocean.com.
 
 * Debian Jessie, kernel 3.16.0-4-amd64, in a VmWare VM at arubacloud.com.
 
-* Debian Wheezy, kernel 3.2.0-4-amd64. VM under Xen version 4.1.2
+* Debian Wheezy, kernel 3.2.0-4-amd64, VM under Xen version 4.1.2
 
 
 Good test results
@@ -96,7 +96,8 @@ Good test results
 
 * Any modern baremetal host should work fine.
 
-* Debian Jessie, VM under Xen hypervisor version 4.4.2-rc1 (at linode.com).
+* Debian Jessie, kernel 4.1.0-x86_64-linode59, VM under Xen hypervisor
+  version 4.4.2-rc1 (at linode.com).
 
 * Debian Jessie, kernel 4.1.0-x86_64-linode59, VM under KVM hypervisor
 at linode.com.
