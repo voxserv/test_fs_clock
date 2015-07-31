@@ -15,7 +15,7 @@ BATCH=/tmp/test_fs_clock_$$
 rm -f /var/tmp/test_fs_clock_*.wav
 
 
-for y in {1..10}; do
+for y in {1..5}; do
     echo 'bgapi originate sofia/external/test_fs_clock@'${MYURL}' &playback('${TESTAUDIO}')' >>${BATCH}
 done
 

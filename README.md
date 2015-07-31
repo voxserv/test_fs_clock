@@ -1,6 +1,11 @@
 Test clock precision on a FreeSWITCH host
 =========================================
 
+WARNING
+-------
+
+The test results are not reliable, and the source of the problem seems
+to be in CPU resource scarcity inside a VM, and not in clock precision.
 
 Introduction
 ------------
@@ -80,37 +85,6 @@ rm /etc/freeswitch/dialplan/public/999_test_fs_clock.xml
 fs_cli -x 'reloadxml'
 ```
 
-Bad test results
-----------------
-
-* Debian Jessie, kernel 3.16.0-4-amd64, in a KVM virtual machine at
-digitalocean.com.
-
-* Debian Jessie, kernel 3.16.0-4-amd64, in a VmWare VM at arubacloud.com.
-
-
-
-Medium test results
--------------------
-
-This was observed in Xen machines: most of results produce Distance: 0,
-but some minor number of files produce nonzero distance.
-
-* Debian Wheezy, kernel 3.2.0-4-amd64, VM under Xen version 4.1.2
-
-* Debian Jessie, kernel 4.1.0-x86_64-linode59, VM under Xen hypervisor
-  version 4.4.2-rc1 (at linode.com).
-
-
-
-Good test results
------------------
-
-* Any modern baremetal host should work fine.
-
-
-* Debian Jessie, kernel 4.1.0-x86_64-linode59, VM under KVM hypervisor
-at linode.com.
 
 
 
