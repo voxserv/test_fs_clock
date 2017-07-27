@@ -50,7 +50,7 @@ Installing this test suite
 --------------------------
 
 ```
-apt-get install -y libmath-vector-real-perl libmath-vector-real-xs-perl
+apt-get install -y libmath-vector-real-perl libmath-vector-real-xs-perl sox
 cd /opt
 git clone https://github.com/voxserv/test_fs_clock.git
 cp /opt/test_fs_clock/999_test_fs_clock.xml /etc/freeswitch/dialplan/public/
